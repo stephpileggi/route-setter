@@ -5,11 +5,15 @@ import styled from 'styled-components';
 
 const Walls = styled.div`
     width: 500px;
-    height: 800px;
+    min-height: 300px;
     border: 2px black solid;
+`;
+
+const TestingWidth = styled.div`
     display: flex;
     justify-content: space-evenly;
-    align-content: flex-start;
+    align-content: space-around;
+    // align-content: flex-start;
     flex-wrap: wrap;
 `;
 
@@ -18,11 +22,20 @@ const Circle = styled.div`
     width: 5px;
     height: 5px;
     border-radius: 50%;
+    margin: 5%;
 `;
 
-const Test = styled.div`
+const RangeVaule = styled.div`
     color: red;
     font-size: 20px;
+`;
+
+const TestingHeight = styled.div`
+    display: flex;
+    justify-content: space-evenly;
+    align-content: space-around;
+    // flex-direction: column;
+    // align-content: space-around;
 `;
 
 class Wall extends Component {
@@ -30,43 +43,73 @@ class Wall extends Component {
         super(props);
         this.state = {
           widthValue: 0,
-          heightValue: 0
+          heightValue: 1,
+          holeValue:0
         };
       }
 
-    handleWidthChange = (e) => {
-        this.setState({widthValue: e.target.value});
-    };
+    // handleWidthChange = (e) => {
+    //     this.setState({widthValue: e.target.value});
+    // };
 
-    handleHeightChange = (e) => {
-        this.setState({heightValue: e.target.value});
-    };      
+    // handleHeightChange = (e) => {
+    //     this.setState({heightValue: e.target.value});
+    // };    
+    
+    handleHoleChange = (e) => {
+        this.setState({holeValue: e.target.value});
+    }; 
 
     
     render() {
-        let circles = [];
 
-        for (let i = 0; i < this.state.widthValue; i++) {
-            circles.push(<p key={i}><Circle /></p>);
-          }
+        // MAKE THE AMOUNT OF HOLES DYNAMIC 
+
+        // let widthCircles = [];
+        // let heightCircles = [];
+
+        // for (let i = 0; i < this.state.widthValue; i++) {
+        //     widthCircles.push(<Circle key={i}></Circle>);
+        // }
+
+        // for (let i = 0; i < this.state.heightValue * this.state.widthValue - this.state.widthValue; i++) {
+        //     heightCircles.push(<Circle key={i}></Circle>)
+        // }
+
+        // console.log(heightCircles.length / this.state.widthValue)
+
+
+        let holeNumber = [];
+
+        for (let i = 0; i < this.state.holeValue; i++) {
+            holeNumber.push(<Circle key={i}></Circle>)
+        }
 
         return (
             <Fragment>
                 <p>Wall settings:</p>
-                <div>
+                {/* <div>
                     <input type="range" min="0" max="20" value={this.state.widthValue} required onChange={this.handleWidthChange}  />
                     <label>Width</label>
-                    <Test>{this.state.widthValue}</Test>
+                    <RangeVaule>{this.state.widthValue}</RangeVaule>
                 </div>
 
                 <div>
-                    <input type="range" min="0" max="50" value={this.state.heightValue} required onChange={this.handleHeightChange} />
+                    <input type="range" min="0" max="20" value={this.state.heightValue} required onChange={this.handleHeightChange} />
                     <label>Height</label>
-                    <Test>{this.state.heightValue}</Test>
+                    <RangeVaule>{this.state.heightValue}</RangeVaule>
+                </div> */}
+
+                <div>
+                    <input type="range" min="0" max="99" value={this.state.holeValue} required onChange={this.handleHoleChange} />
+                    <label>Number of holes</label>
+                    <RangeVaule>{this.state.holeValue}</RangeVaule>
                 </div>
                 
-                <Walls> 
-                    {circles}
+                <Walls>
+                    <TestingWidth>
+                        {holeNumber}
+                    </TestingWidth>
                 </Walls>
             </Fragment>
         )
